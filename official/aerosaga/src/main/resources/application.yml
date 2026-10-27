@@ -1,0 +1,48 @@
+# Default settings: laptop development.
+# Production overrides live in application-prod.yml and environment variables.
+
+server:
+  port: 8080
+  # Trust X-Forwarded-* headers from the reverse proxy (Caddy) so HTTPS is detected correctly
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: aerosaga
+  datasource:
+    # H2 file database in ./data (created automatically). Delete the folder to reset.
+    url: jdbc:h2:file:./data/aerosaga
+    username: sa
+    password: ""
+  jpa:
+    # Flyway owns the schema. Hibernate must never change tables by itself.
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  security:
+    user:
+      name: ${AEROSAGA_USER:operator}
+      password: ${AEROSAGA_PASSWORD:local-dev-only}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+aerosaga:
+  temporal:
+    target: ${TEMPORAL_TARGET:localhost:7233}
+    namespace: ${TEMPORAL_NAMESPACE:default}
+    task-queue: aerosaga-missions
+    connect: true
+    worker-enabled: true
+  simulation:
+    # 1.0 = real flight time. 0.05 = 20x faster (good for demos).
+    time-scale: ${AEROSAGA_TIME_SCALE:0.05}
+  airspace:
+    capacity: 3

@@ -58,3 +58,9 @@ $RECYCLE.BIN/
 *.log
 logs/
 **/logs/
+
+data/
+**/data/
+temporal.db*
+*.html
+*_files/

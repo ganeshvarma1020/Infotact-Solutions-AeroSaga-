@@ -1,0 +1,76 @@
+# AeroSaga production stack: one server, four containers.
+#   caddy    -> public entry, automatic HTTPS certificate, forwards to app
+#   app      -> Spring Boot API + dashboard + Temporal worker
+#   postgres -> mission history database
+#   temporal -> workflow engine (single-node, SQLite file on a volume)
+# Secrets come from the .env file next to this file (never commit .env).
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: aerosaga
+      POSTGRES_USER: ${DB_USER:?set DB_USER in .env}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d aerosaga"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  temporal:
+    image: temporalio/temporal:1.9.1
+    restart: unless-stopped
+    # Runs as root only so it can write its database file to the volume
+    user: root
+    command: ["server", "start-dev", "--ip", "0.0.0.0", "--db-filename", "/data/temporal.db"]
+    volumes:
+      - temporaldata:/data
+    ports:
+      # Temporal Web UI: bound to localhost only. Reach it with an SSH tunnel, never publicly.
+      - "127.0.0.1:8233:8233"
+
+  app:
+    build: .
+    image: aerosaga:latest
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      temporal:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:postgresql://postgres:5432/aerosaga
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      AEROSAGA_USER: ${AEROSAGA_USER:?set AEROSAGA_USER in .env}
+      AEROSAGA_PASSWORD: ${AEROSAGA_PASSWORD:?set AEROSAGA_PASSWORD in .env}
+      TEMPORAL_TARGET: temporal:7233
+      AEROSAGA_TIME_SCALE: ${AEROSAGA_TIME_SCALE:-0.05}
+    expose:
+      - "8080"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddydata:/data
+      - caddyconfig:/config
+
+volumes:
+  pgdata:
+  temporaldata:
+  caddydata:
+  caddyconfig:

@@ -1,24 +1,23 @@
 @echo off
-title AeroSaga Master Launcher
+title AeroSaga Master Launcher (Official Guide Ref ITS/JD/1144)
 echo ========================================================
 echo   Launching AeroSaga Drone Mission Control Platform
 echo ========================================================
 echo.
-echo 1. Launching Spring Boot + Temporal.io Backend...
-start "AeroSaga Backend" cmd /k ""%~dp0run-backend.bat""
+echo Starting AeroSaga Application on Port 8080...
+cd /d "%~dp0official\aerosaga"
+start "AeroSaga Mission Control" cmd /k "mvnw.cmd spring-boot:run"
 
-echo 2. Launching React 18 + Vite Frontend...
-start "AeroSaga Frontend" cmd /k ""%~dp0run-frontend.bat""
-
-echo 3. Waiting for services to initialize...
+echo Waiting for application to initialize...
 timeout /t 6 /nobreak > nul
 
-echo 4. Opening Mission Control Dashboard in your browser...
-start http://localhost:5173
+echo Opening Mission Control Dashboard in Chrome...
+start http://localhost:8080
 echo.
 echo ========================================================
-echo   AeroSaga is running! Keep the command windows open.
-echo   UI: http://localhost:5173
-echo   Swagger: http://localhost:8080/swagger-ui/index.html
+echo   AeroSaga is running! Keep the command window open.
+echo   URL:      http://localhost:8080
+echo   User:     operator
+echo   Password: local-dev-only
 echo ========================================================
 exit
