@@ -1,0 +1,10 @@
+﻿image: gitpod/workspace-java-21
+ports:
+  - port: 8080
+    name: AeroSaga Mission Control
+    onOpen: open-browser
+    visibility: public
+tasks:
+  - name: Build & Run AeroSaga
+    init: chmod +x mvnw && ./mvnw clean compile -DskipTests
+    command: ./mvnw spring-boot:run
