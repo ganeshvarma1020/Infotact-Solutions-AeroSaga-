@@ -1,4 +1,4 @@
-# 🛸 AeroSaga: Autonomous Drone Mission Control Platform
+﻿# ðŸ›¸ AeroSaga: Autonomous Drone Mission Control Platform
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ganeshvarma1020/Infotact-Solutions-AeroSaga-)
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ganeshvarma1020/Infotact-Solutions-AeroSaga-)
@@ -10,11 +10,11 @@
 
 AeroSaga is an enterprise-grade autonomous drone fleet mission control and telemetry visualization system orchestrated by **Temporal.io**, powered by **Spring Boot 3**, and interfaced via a high-performance **Mission Control Dashboard** with real-time geospatial radar and telemetry tracking.
 
-> 🚀 **Direct Cloud Run (No Local Installation Required)**: Click **[Open in GitHub Codespaces](https://codespaces.new/ganeshvarma1020/Infotact-Solutions-AeroSaga-)** to launch the entire platform in your browser. As soon as the container initializes, port `8080` is automatically forwarded and directly opens the live Mission Control UI on a new URL (`https://<codespace-id>-8080.app.github.dev`)!
+> ðŸš€ **Direct Cloud Run (No Local Installation Required)**: Click **[Open in GitHub Codespaces](https://codespaces.new/ganeshvarma1020/Infotact-Solutions-AeroSaga-)** to launch the entire platform in your browser. As soon as the container initializes, port `8080` is automatically forwarded and directly opens the live Mission Control UI on a new URL (`https://<codespace-id>-8080.app.github.dev`)!
 
 ---
 
-## 🌐 1-Click Cloud Execution (Run on New URL via GitHub Port Forwarding)
+## ðŸŒ 1-Click Cloud Execution (Run on New URL via GitHub Port Forwarding)
 
 You can run and evaluate AeroSaga directly inside GitHub without installing Java, Maven, or Node.js on your computer:
 
@@ -27,7 +27,7 @@ You can run and evaluate AeroSaga directly inside GitHub without installing Java
      - **Port**: `8080` (AeroSaga Mission Control)
      - **Forwarded Address**: Click the globe icon or the URL link (e.g. `https://<codespace-id>-8080.app.github.dev`).
 4. **Make Port Public (For External Evaluators / Mentors)**:
-   - In the **PORTS** tab, right-click on Port `8080` ➔ **Port Visibility** ➔ Select **Public**.
+   - In the **PORTS** tab, right-click on Port `8080` âž” **Port Visibility** âž” Select **Public**.
    - Anyone with the forwarded URL can now test and view your live platform without logging into GitHub!
 
 ### Option 2: Gitpod Cloud Environment
@@ -36,7 +36,7 @@ You can run and evaluate AeroSaga directly inside GitHub without installing Java
 
 ---
 
-## 🔗 Live Endpoints on Forwarded Cloud Port (Port 8080)
+## ðŸ”— Live Endpoints on Forwarded Cloud Port (Port 8080)
 
 Once the application is running in Codespaces or locally, access the following URLs:
 
@@ -55,7 +55,7 @@ Once the application is running in Codespaces or locally, access the following U
 
 ---
 
-## 🏛️ System Architecture
+## ðŸ›ï¸ System Architecture
 
 ```text
                                   +---------------------------------------+
@@ -96,7 +96,7 @@ Once the application is running in Codespaces or locally, access the following U
 
 ---
 
-## 💻 Local Quick Start
+## ðŸ’» Local Quick Start
 
 ### Windows One-Click Launcher:
 Double-click `Start AeroSaga Mission Control.bat` on your Desktop. It will automatically check dependencies, boot the Spring Boot server, poll port 8080 until ready, and open the browser.
@@ -114,7 +114,7 @@ Open `http://localhost:8080/` in your browser.
 
 ---
 
-## 🔑 Default Credentials & Role-Based Access Control
+## ðŸ”‘ Default Credentials & Role-Based Access Control
 
 The platform initializes with pre-configured authentication profiles:
 
@@ -125,7 +125,7 @@ The platform initializes with pre-configured authentication profiles:
 
 ---
 
-## ⚡ Temporal.io Workflow & The Saga Compensation Pattern
+## âš¡ Temporal.io Workflow & The Saga Compensation Pattern
 
 Autonomous drone missions are long-running, asynchronous, and safety-critical:
 1. **Deterministic Workflow**: `DroneMissionWorkflowImpl` executes deterministic stages:
@@ -141,7 +141,7 @@ Autonomous drone missions are long-running, asynchronous, and safety-critical:
 
 ---
 
-## 📡 REST API Catalog
+## ðŸ“¡ REST API Catalog
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
@@ -156,10 +156,11 @@ Autonomous drone missions are long-running, asynchronous, and safety-critical:
 
 ---
 
-## 📁 Submission Deliverables
+## ðŸ“ Submission Deliverables
 
 * [`PROJECT_REPORT.md`](PROJECT_REPORT.md) - Formal academic/internship project report.
 * [`AeroSaga_Final_Presentation.pptx`](AeroSaga_Final_Presentation.pptx) - 14-slide widescreen presentation deck.
 * [`AeroSaga_Build_and_Deploy_Guide.pdf`](AeroSaga_Build_and_Deploy_Guide.pdf) - Official build & go-live manual.
 * [`AeroSaga_Project_Explanation.pdf`](AeroSaga_Project_Explanation.pdf) - Comprehensive project explanation report.
 * [`DEMONSTRATION_GUIDE.md`](DEMONSTRATION_GUIDE.md) - Live evaluation and demonstration script.
+
